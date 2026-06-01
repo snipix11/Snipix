@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snipix Studio — Admin Dashboard</title>
+    <!-- Fontshare Fonts: Clash Display & General Sans -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for minimal clean icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css?v=1">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="auth-container">
+        <div class="auth-card">
+            <h1 class="auth-logo">SNIPIX ADMIN</h1>
+            <p class="auth-subtitle">Secure Access Required</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="adminEmail">EMAIL</label>
+                    <input type="email" id="adminEmail" required placeholder="admin@snipix.com">
+                </div>
+                <div class="form-group">
+                    <label for="adminPassword">PASSWORD</label>
+                    <input type="password" id="adminPassword" required placeholder="••••••••">
+                </div>
+                <div id="loginError" class="error-msg"></div>
+                <button type="submit" class="btn-primary" id="loginBtn">
+                    <span class="btn-text">AUTHENTICATE</span>
+                    <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Screen -->
+    <div id="dashboardScreen" class="dashboard-container hidden">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>SNIPIX</h2>
+                <p>Command Center</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
+                <a href="index.html" target="_blank"><i class="fa-solid fa-globe"></i> View Site</a>
+            </nav>
+            <div class="sidebar-config">
+                <label for="adminSecretInput">Admin Secret Key</label>
+                <div class="secret-input-wrapper">
+                    <input type="password" id="adminSecretInput" placeholder="Enter key...">
+                    <button type="button" id="toggleSecretBtn" class="btn-toggle-secret" title="Toggle Secret Visibility">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
+                <p class="config-help">Saves locally in this browser. Used automatically to authorize emails.</p>
+            </div>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout"><i class="fa-solid fa-power-off"></i> Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div>
+                    <h1 class="page-title">Client Bookings</h1>
+                    <p class="page-subtitle">Manage scheduling and briefs</p>
+                </div>
+                <div class="header-actions">
+                    <button id="refreshBtn" class="btn-icon-only"><i class="fa-solid fa-rotate-right"></i></button>
+                </div>
+            </header>
+
+            <div class="table-container">
+                <table class="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Client Info</th>
+                            <th>Project Brief</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <!-- Bookings loaded via JS -->
+                        <tr>
+                            <td colspan="5" class="loading-state">Loading secured data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Email Composer Modal -->
+    <div id="emailModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Compose Email</h2>
+                <button id="closeModalBtn" class="btn-icon-only"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="emailForm">
+                <input type="hidden" id="emailToAddress">
+                <div class="form-group">
+                    <label>TO:</label>
+                    <input type="text" id="emailToDisplay" disabled>
+                </div>
+                <div class="form-group">
+                    <label>SUBJECT:</label>
+                    <input type="text" id="emailSubject" required placeholder="Regarding your project...">
+                </div>
+                <div class="form-group">
+                    <label>MESSAGE:</label>
+                    <textarea id="emailMessage" required rows="6" placeholder="Write your message here..."></textarea>
+                </div>
+                <div id="emailError" class="error-msg"></div>
+                <button type="submit" class="btn-primary" id="sendEmailBtn">
+                    <span class="btn-text">SEND EMAIL</span>
+                    <span class="btn-icon"><i class="fa-regular fa-paper-plane"></i></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="admin.js?v=1"></script>
+</body>
+
+</html>
