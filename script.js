@@ -150,7 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ease: "power3.inOut"
                 })
                     .to(preloader, {
-                        clipPath: "circle(0% at 50% 50%)",
+                        y: "-100%",
+                        opacity: 0,
                         duration: 1.4,
                         ease: "power4.inOut"
                     }, "-=0.3")
